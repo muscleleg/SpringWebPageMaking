@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
@@ -32,9 +33,19 @@ public class BasicItemController {
         model.addAttribute("item", item);
         return "basic/item";
     }
+
+    @GetMapping("/add")
+    public String addForm() {
+        return "basic/addForm";
+    }
+    @PostMapping("/add")
+    public String save() {
+        return "basic/items";
+    }
     //테스트용 데이터 추가, 의존성 주입이 끝난 후 , 실행되는 어노태이션, 주로 초기화할 메소드가 있을때 쓴다고함
     @PostConstruct
-    public void init(){
+    public void init() {
+
         itemRepository.save(new Item("itemA", 20000, 10));
         itemRepository.save(new Item("itemB", 20000, 20));
 
