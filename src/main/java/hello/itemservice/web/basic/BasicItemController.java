@@ -26,7 +26,12 @@ public class BasicItemController {
         return "basic/items";
     }
 
-
+    @GetMapping("/{itemId}")
+    public String item(@PathVariable long itemId, Model model) {
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+        return "basic/item";
+    }
     //테스트용 데이터 추가, 의존성 주입이 끝난 후 , 실행되는 어노태이션, 주로 초기화할 메소드가 있을때 쓴다고함
     @PostConstruct
     public void init(){
